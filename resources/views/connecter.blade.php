@@ -31,7 +31,7 @@
                 <label class="mb-2" for="password">Mot de passe : </label><br>
                 <input type="password" name="password" class="form-control" placeholder="Votre mot de passe"><br>
                 <div class="text-center mb-3"> 
-                    <a href="{{ url('/mot-de-passe-oublie') }}"> Mot de passe oublié ? </a> 
+                    <a href="{{ url('/mdpOublie') }}"> Mot de passe oublié ? </a> 
                 </div>
                 
                 <div class=""> 

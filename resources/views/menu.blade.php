@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    @include('_navbar')
+    @include('sous_partie\navbar')
 
     <div class="container py-5">
         <div class="text-center mb-5">

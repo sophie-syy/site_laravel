@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    @include('_navbar')
+    @include('sous_partie\navbar')
 
     <div class="container py-5">
         <div class="row justify-content-center">

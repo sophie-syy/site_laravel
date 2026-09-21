@@ -43,8 +43,8 @@ Route::delete('/panier/vider', [PanierController::class, 'vider']);
 Route::post('/commande', [CommandeController::class, 'acheter']);
 
 
-Route::get( '/mot-de-passe-oublie', [MotDePasseController::class, 'afficherFormulaire']);
-Route::post( '/mot-de-passe-oublie', [MotDePasseController::class, 'envoyerLien']);
-Route::get( '/reinitialiser-mot-de-passe/{token}', [MotDePasseController::class, 'afficherReinitialisation']);
-Route::post('/reinitialiser-mot-de-passe', [MotDePasseController::class, 'reinitialiser']);
+Route::get( '/mdpOublie', [MotDePasseController::class, 'afficherFormulaire']);
+Route::post( '/mdpOublie', [MotDePasseController::class, 'envoyerLien']);
+Route::get( '/mdpReinitialiser/{token}', [MotDePasseController::class, 'afficherReinitialisation']);
+Route::post('/mdpReinitialiser', [MotDePasseController::class, 'reinitialiser']);
 

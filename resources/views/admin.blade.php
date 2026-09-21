@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    @include('_navbar')
+    @include('sous_partie\navbar')
     <div class="container mt-5">
         <ul class="nav nav-pills justify-content-center mb-4">
 
@@ -62,26 +62,26 @@
                 id="produits"
             >
                 <div id="formAjout">
-                    @include('_ajproduit') 
+                    @include('sous_partie\ajproduit') 
                 </div>
 
-                @include('_modiproduit')
+                @include('sous_partie\modiproduit')
 
-                @include('_produit')
+                @include('sous_partie\produit')
             </div>
 
             <div 
                 class="tab-pane fade {{ session('onglet') === 'categories' ? 'show active' : '' }}"
                 id="categories" 
             >
-                @include('_categorie')
+                @include('sous_partie\categorie')
             </div>
 
             <div 
                 class="tab-pane fade {{ session('onglet') === 'clients' ? 'show active' : '' }}"
                 id="clients" 
             >
-                @include('_client')   
+                @include('sous_partie\client')   
             </div>
         </div>
     </div>

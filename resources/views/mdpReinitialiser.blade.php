@@ -30,7 +30,7 @@
                 </div>
             @endif
 
-            <form action="{{ url('/reinitialiser-mot-de-passe') }}" method="POST" >
+            <form action="{{ url('/mdpReinitialiser') }}" method="POST" >
 
                 @csrf
 

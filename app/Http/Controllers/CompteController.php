@@ -10,10 +10,16 @@ use App\Models\Produit;
 
 class CompteController extends Controller
 {
-    public function home_index()
-    {
-        return view('welcome');
+    public function home_index() 
+    { 
+        $produits = Produit::with('categories') 
+            ->inRandomOrder() 
+            ->take(3) 
+            ->get(); 
+
+        return view('welcome', compact('produits')); 
     }
+
     
     public function creer_index()
     {

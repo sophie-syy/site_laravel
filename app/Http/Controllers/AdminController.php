@@ -60,7 +60,7 @@ class AdminController extends Controller
             'image' => $request->image,
         ]);
 
-        $produit->categories()->attach($request->categories);
+        $produit->categories()->sync($request->categories);
 
         return redirect('/admin')
             ->with('message', 'Produit ajouté avec succès.')
