@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Création du compte administrateur
         Parcel::create([
             'nom' => 'Admin',
             'prenom' => 'Admin',
@@ -21,7 +20,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // Création des catégories
         $nomsCategories = [
             'Bubble Tea',
             'Jus',
@@ -35,10 +33,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Récupération des catégories
         $categories = Categorie::all();
 
-        // Création des produits
         Produit::factory()
             ->count(20)
             ->create()
