@@ -30,6 +30,7 @@ Route::delete('/admin/categorie/{id}', [AdminController::class, 'destroyCategori
 Route::delete('/admin/client/{id}', [AdminController::class, 'destroyClient']);
 
 Route::get('/compte', [CompteController::class, 'accueil']);
+Route::put('/compte', [CompteController::class, 'modifier_infos']);
 Route::post('/compte', [CompteController::class, 'deconnexion']);
 Route::delete('/compte', [CompteController::class, 'supprimer_compte']);
 

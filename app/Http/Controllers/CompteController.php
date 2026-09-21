@@ -125,6 +125,70 @@ class CompteController extends Controller
             ->with('message', 'Votre compte a été supprimé.');
     }
 
+
+    public function modifier_infos(Request $request)
+    {
+        if (!session('parcel_id')) {
+            return redirect('/connecter');
+        }
+
+        $parcel = Parcel::find(session('parcel_id'));
+
+        if (!$parcel) {
+            session()->forget('parcel_id');
+
+            return redirect('/connecter');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:parcels,email,' . $parcel->id,
+            'ancien_password' => 'nullable|string',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/compte')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $parcel->nom = $request->nom;
+        $parcel->prenom = $request->prenom;
+        $parcel->email = $request->email;
+
+        if ($request->filled('password')) {
+
+            if (!$request->filled('ancien_password')) {
+                return redirect('/compte')
+                    ->withErrors([
+                        'ancien_password' =>
+                            'Veuillez saisir votre ancien mot de passe.'
+                    ])
+                    ->withInput();
+            }
+
+            if (!Hash::check( $request->ancien_password, $parcel->password)) {
+                return redirect('/compte')
+                    ->withErrors([
+                        'ancien_password' =>'Votre ancien mot de passe est incorrect.'
+                    ])
+                    ->withInput();
+            }
+
+            $parcel->password = Hash::make(
+                $request->password
+            );
+        }
+
+        $parcel->save();
+
+        return redirect('/compte')
+            ->with('message', 'Vos informations ont été modifiées avec succès.');
+    }
+
+
 }
 
 
