@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            <form action="{{ url('/mot-de-passe-oublie') }}"  method="POST">
+            <form action="{{ url('/mdpOublie') }}"  method="POST">
 
                 @csrf
                 <div class="mb-4">

@@ -73,23 +73,14 @@ class CompteController extends Controller
                 ->withInput();
         }
 
-        // Chercher le compte avec l'email
         $parcel = Parcel::where('email', $request->email)->first();
 
-        // Compte inexistant ou mauvais mot de passe
         if (!$parcel || !Hash::check($request->password, $parcel->password)) {
             return redirect('/connecter')
                 ->with('message', 'Email ou mot de passe incorrect.');
         }
 
-        // Enregistrer le compte connecté
-        session([
-            'parcel_id' => $parcel->id
-        ]);
-
-        if ($parcel->role === 'admin') {
-            return redirect('/admin');
-        }
+        session(['parcel_id' => $parcel->id]);
 
         return redirect('/compte')
             ->with(
@@ -109,7 +100,6 @@ class CompteController extends Controller
 
         if (!$parcel) {
             session()->forget('parcel_id');
-
             return redirect('/connecter');
         }
 
@@ -118,7 +108,7 @@ class CompteController extends Controller
 
     public function deconnexion()
     {
-        session()->forget('parcel_id');
+        session()->invalidate();
 
         return redirect('/connecter')
             ->with('message', 'Vous êtes déconnecté.');
@@ -130,7 +120,7 @@ class CompteController extends Controller
         $parcel = Parcel::find(session('parcel_id'));
         if ($parcel) {$parcel->delete();}
 
-        session()->forget('parcel_id');
+        session()->invalidate();
         return redirect('/creer')
             ->with('message', 'Votre compte a été supprimé.');
     }

@@ -14,7 +14,7 @@ class MotDePasseController extends Controller
 {
     public function afficherFormulaire()
     {
-        return view('mot_de_passe_oublie');
+        return view('mdpOublie');
     }
 
     public function envoyerLien(Request $request)
@@ -27,10 +27,7 @@ class MotDePasseController extends Controller
 
         if (!$parcel) {
             return back()
-                ->with(
-                    'message',
-                    'Aucun compte ne correspond à cet e-mail.'
-                )
+                ->with('message', 'Aucun compte ne correspond à cet e-mail.')
                 ->withInput();
         }
 
@@ -44,7 +41,7 @@ class MotDePasseController extends Controller
             ]
         );
 
-        $lien = url('/reinitialiser-mot-de-passe/' . $token)
+        $lien = url('/mdpReinitialiser/' . $token)
             . '?email=' . urlencode($parcel->email);
 
         Mail::to($parcel->email)
@@ -61,7 +58,7 @@ class MotDePasseController extends Controller
         $token
     ) {
         return view(
-            'reinitialiser_mot_de_passe',
+            'mdpReinitialiser',
             [
                 'token' => $token,
                 'email' => $request->email,
