@@ -14,22 +14,16 @@ return new class extends Migration
         Schema::create('paniers', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('parcel_id');
-            $table->unsignedBigInteger('produit_id');
+            $table->foreignId('parcel_id')
+                ->constrained('parcels')
+                ->onDelete('cascade');
+
+            $table->foreignId('produit_id')
+                ->constrained('produits')
+                ->onDelete('cascade');
 
             $table->integer('quantite')->default(1);
-
             $table->timestamps();
-
-            $table->foreign('parcel_id')
-                ->references('id')
-                ->on('parcels')
-                ->onDelete('cascade');
-
-            $table->foreign('produit_id')
-                ->references('id')
-                ->on('produits')
-                ->onDelete('cascade');
         });
     }
 

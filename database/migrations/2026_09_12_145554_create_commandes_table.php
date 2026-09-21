@@ -14,18 +14,14 @@ return new class extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('parcel_id')->nullable();
-
-            $table->string('numero_ticket')->unique();
-
-            $table->decimal('total', 8, 2);
-
-            $table->timestamps();
-
-            $table->foreign('parcel_id')
-                ->references('id')
-                ->on('parcels')
+            $table->foreignId('parcel_id')
+                ->nullable()
+                ->constrained('parcels')
                 ->onDelete('set null');
+                
+            $table->string('numero_ticket')->unique();
+            $table->decimal('total', 8, 2);
+            $table->timestamps();
         });
     }
 

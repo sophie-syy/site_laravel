@@ -14,24 +14,17 @@ return new class extends Migration
         Schema::create('commande_produit', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('commande_id');
-            $table->unsignedBigInteger('produit_id');
+            $table->foreignId('commande_id')
+                ->constrained('commandes')
+                ->onDelete('cascade');
+
+            $table->foreignId('produit_id')
+                ->constrained('produits')
+                ->onDelete('cascade');
 
             $table->integer('quantite');
-
             $table->decimal('prix', 8, 2);
-
             $table->timestamps();
-
-            $table->foreign('commande_id')
-                ->references('id')
-                ->on('commandes')
-                ->onDelete('cascade');
-
-            $table->foreign('produit_id')
-                ->references('id')
-                ->on('produits')
-                ->onDelete('cascade');
         });
     }
 
